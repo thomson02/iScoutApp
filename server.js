@@ -7,7 +7,7 @@ var express = require('express')
     , api = require('./api')
     , http = require('http')
     , path = require('path')
-    , models = require('./models')
+    , models = require("./models")
     , mongoose = require('mongoose');
 
 // Setup the Mongo db connection
@@ -23,10 +23,9 @@ app.configure(function(){
     app.set('port', process.env.PORT || 3000);
     app.use(express.bodyParser());
     app.use(express.methodOverride());
-    app.use(express.cookieParser('Lycurgus knows best'));
+    app.use(express.cookieParser('@tt3ndanc3'));
     app.use(express.session());
     app.use(app.router);
-    app.use(require('less-middleware')({ src: __dirname + '/app' }));
     app.use(express.static(path.join(__dirname, 'app')));
 });
 
@@ -38,16 +37,11 @@ app.configure('development', function(){
 // ================
 app.get('/', function(req, res) {
     var userAgent = req.headers['user-agent'];
-    console.log(userAgent);
-    if (/mobile/i.test(userAgent) || /Android/.test(userAgent)){
-        return res.sendfile('./app/mobile.html');
-    } else {
-        if(!req.user) {
-            return res.sendfile('./app/splash.html');
-        }
-
-        return res.sendfile('./app/index.html');
+    if(!req.user) {
+        return res.sendfile('./app/splash.html');
     }
+
+    return res.sendfile('./app/index.html');
 });
 
 //api.configureRoutes(app, graph, ObjectType, UniqueObject, User);
