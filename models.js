@@ -4,32 +4,33 @@ exports.configureSchema = function(Schema, mongoose) {
     var userSchema = new mongoose.Schema({
         name: String,
         email: String,
-        fbid: String,
-        fblink: String,
-        fbimg: String
+        phone: String,
+        mobile: String,
+        patrol: {
+            name: String,
+            rank: String
+        },
+        medical: String,
+        attendance: [{
+            date: Date,
+            points: {
+                shirt: Number,
+                trousers: Number,
+                neckie: Number,
+                belt: Number,
+                shoes: Number,
+                penPaper: Number,
+                book: Number,
+                behaviour: Number
+            }
+        }]
     });
 
-    var uniqueObjectSchema = new mongoose.Schema({
-        name: String,
-        type: String,
-        owner: String,
-        ownerId: String,
-        typeId: String,
-        value: String, // need to convert to and from the JSON
-        images:  [{ title: String, ind: Number }],
-        receipt: String
+    var metaDataSchema = new mongoose.Schema({
+        key: String,
+        object: String // JSON Formatted
     });
 
-    var objectTypeSchema = new mongoose.Schema({
-        name: String,
-        parent: String,
-        image: String,
-        parentId: String,
-        template: String,
-        wallpaper: String
-    });
-
-    mongoose.model('ObjectType', objectTypeSchema);
-    mongoose.model('UniqueObject', uniqueObjectSchema);
     mongoose.model('User', userSchema);
+    mongoose.model('MetaData', metaDataSchema);
 };

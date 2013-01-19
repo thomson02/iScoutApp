@@ -15,6 +15,9 @@ var express = require('express')
 var db = mongoose.createConnection(process.env.MONGOLAB_URI);
 models.configureSchema(mongoose.Schema, mongoose);
 
+var User = db.model('User');
+var MetaData = db.model('MetaData');
+
 // Configure the App
 // =================
 var app = express();
@@ -36,7 +39,6 @@ app.configure('development', function(){
 // Setup the Routes
 // ================
 app.get('/', function(req, res) {
-    var userAgent = req.headers['user-agent'];
     if(!req.user) {
         return res.sendfile('./app/splash.html');
     }
@@ -44,7 +46,7 @@ app.get('/', function(req, res) {
     return res.sendfile('./app/index.html');
 });
 
-//api.configureRoutes(app, graph, ObjectType, UniqueObject, User);
+api.configureRoutes(app, User, MetaData);
 
 // Setup the server
 // ================
