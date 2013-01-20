@@ -6,34 +6,31 @@
  * To change this template use File | Settings | File Templates.
  */
 
-var utils = require('utils');
+var util = require('util');
 
 exports.configureRoutes = function(app, User, MetaData) {
 
-    // ROUTES
-    app.get('/api/user/:id', getUserHeaderById);
-    app.post('/api/user/:id', createUser);
-    app.put('/api/user/:id', editUserHeader);
-
-    app.get('/api/attendance/user/:id', getAttendanceForUser);
-    app.post('/api/attendance/user/:id', addAttendanceToUser);
-
-    app.get('/api/patrols', getListOfPatrols);
-    app.get('/api/patrols/:patrol', getMembersOfPatrol);
-
-
     // SUPPORTING FUNCS
+    var getUsers = function(req, res){
+        User.find(function(err, users){
+            if (err) {
+                console.log(err);
+                return res.json({ result: "Failed" });
+            }
+
+            return res.json({ result: "Success", users: users });
+        });
+    };
+
     var getUserHeaderById = function(req, res){
       User.findOne({ _id: req.params.id }, function(err, user){
-          user.attendance = []; // empty to reduce size of data transfer
+          user.attendance = [user.attendance[user.attendance.length - 1]]; // reduce size of data transfer by just sending the most recent
           return res.json(user);
       });
     };
 
     var createUser = function(req, res){
         var newUser = new User(req.body)
-        newUser._id = req.params.id;
-
         newUser.save(function(err, saved){
             if (err) {
                 console.log(err);
@@ -82,13 +79,13 @@ exports.configureRoutes = function(app, User, MetaData) {
     };
 
     var getListOfPatrols = function(req, res) {
-      MetaData.find({ key: 'patrols' }, function(err, patrols){
+      MetaData.findOne({ key: 'patrols' }, function(err, patrols){
           if (err) {
               console.log(err);
               return res.json({ result: "Failed" });
           }
 
-          return res.json({ result: "Success", patrols: JSON.parse(patrols) });
+          return res.json({ result: "Success", patrols: JSON.parse(patrols.value) });
       });
     };
 
@@ -102,4 +99,16 @@ exports.configureRoutes = function(app, User, MetaData) {
           return res.json({ result: "Success", members: members });
       });
     };
+
+    // ROUTES
+    app.get('/api/users', getUsers);
+    app.get('/api/user/:id', getUserHeaderById); //
+    app.post('/api/user', createUser);
+    app.put('/api/user/:id', editUserHeader);
+
+    app.get('/api/attendance/user/:id', getAttendanceForUser); //
+    app.post('/api/attendance/user/:id', addAttendanceToUser);
+
+    app.get('/api/patrols', getListOfPatrols); //
+    app.get('/api/patrols/:patrol', getMembersOfPatrol); //
 };

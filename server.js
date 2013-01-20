@@ -39,9 +39,9 @@ app.configure('development', function(){
 // Setup the Routes
 // ================
 app.get('/', function(req, res) {
-    if(!req.user) {
-        return res.sendfile('./app/splash.html');
-    }
+    //if(!req.user) {
+      //  return res.sendfile('./app/splash.html');
+    //}
 
     return res.sendfile('./app/index.html');
 });

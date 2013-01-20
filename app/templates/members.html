@@ -1,0 +1,26 @@
+<div data-role="header" data-id="primary-header" data-position="fixed">
+    <a href="#/home" data-icon="arrow-l">Back</a>
+    <h1>Members</h1>
+</div>
+
+<div data-role="content" style="margin-top: 0px; padding-top: 0px">
+    <ul data-role="listview" data-filter="true" data-filter-placeholder="Search people..." data-filter-theme="d"data-theme="d" data-divider-theme="d">
+
+        <% var firstChar = ""; %>
+        <% _.each(users, function(user){ %>
+
+            <%
+                if (firstChar !== user.name.charAt(0).toUpperCase()) {
+                    firstChar = user.name.charAt(0).toUpperCase();
+            %>
+                <li data-role="list-divider"><%= firstChar %></li>
+            <%
+                }
+            %>
+            <li><a href="#/members/<%= user._id %>"><%= user.name %></a></li>
+
+        <% }); %>
+
+    </ul>
+</div>
+

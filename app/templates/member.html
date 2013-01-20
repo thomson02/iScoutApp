@@ -1,0 +1,37 @@
+<div data-role="header" data-id="primary-header" data-position="fixed">
+    <a href="#/home" data-icon="arrow-l">Back</a>
+    <h1>Member</h1>
+</div>
+
+<div data-role="content" style="margin-top: 0px; padding-top: 0px">
+    <div data-role="fieldcontain">
+        <label for="name">Name:</label>
+        <input readonly="readonly" type="text" name="name" id="name" value="<%= member.name %>"  />
+    </div>
+
+    <div data-role="fieldcontain">
+        <label for="email">Email:</label>
+        <input readonly="readonly" type="text" name="email" id="email" value="<%= member.email %>"  />
+    </div>
+
+    <div data-role="fieldcontain">
+        <label for="phone">Phone:</label>
+        <input readonly="readonly" type="text" name="name" id="phone" value="<%= member.phone %>"  />
+    </div>
+
+    <div data-role="fieldcontain">
+        <label for="name">Mobile:</label>
+        <input readonly="readonly" type="text" name="mobile" id="mobile" value="<%= member.mobile %>"  />
+    </div>
+
+    <div data-role="fieldcontain">
+        <label for="name">Patrol:</label>
+        <% var patrol = member.patrol.rank !== "" ? (member.patrol.name + " (" + member.patrol.rank + ")") : member.patrol.name; %>
+        <input readonly="readonly" type="text" name="patrol" id="patrol" value="<%= patrol %>"  />
+    </div>
+
+    <div data-role="fieldcontain">
+        <label for="medical">Medical Info:</label>
+        <textarea readonly="readonly" type="text" name="medical" id="medical"><%= member.medical %></textarea>
+    </div>
+</div>

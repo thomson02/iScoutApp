@@ -1,0 +1,16 @@
+<div data-role="header" data-id="primary-header" data-position="fixed">
+    <a href="#/home" data-icon="arrow-l">Back</a>
+    <h1>Inspection</h1>
+</div>
+
+<div data-role="content" style="margin-top: 0px; padding-top: 0px">
+    <% _.each(patrols, function(patrolMembers, key){ %>
+        <ul data-role="listview" data-inset="true">
+            <li data-role="list-divider"><%= key %></li>
+            <% _.each(patrolMembers, function(member){ %>
+                <li><a href="#/inspection/<%= member._id %>"><%= member.name %></a></li>
+            <% }); %>
+        </ul>
+    <% }); %>
+</div>
+

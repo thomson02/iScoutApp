@@ -28,7 +28,7 @@ exports.configureSchema = function(Schema, mongoose) {
 
     var metaDataSchema = new mongoose.Schema({
         key: String,
-        object: String // JSON Formatted
+        value: String // JSON Formatted
     });
 
     mongoose.model('User', userSchema);
