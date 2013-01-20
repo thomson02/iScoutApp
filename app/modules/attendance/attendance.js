@@ -1,8 +1,8 @@
 define(
-    ['jquery', 'backbone', 'underscore', 'text!templates/inspection.html'],
+    ['jquery', 'backbone', 'underscore', 'text!modules/attendance/attendance.html'],
     function($, Backbone, _, template) {
 
-        var Inspection = Backbone.View.extend({
+        var Attendance = Backbone.View.extend({
 
             initialize: function(options) {
                 _.bindAll(this);
@@ -15,12 +15,12 @@ define(
             },
 
             render: function() {
-                console.log("Rendering the Inspection page.");
+                console.log("Rendering the Attendance page.");
                 var html = _.template(template, { patrols: this.patrols });
                 this.$el.html(html);
                 return this;
             }
         });
 
-        return Inspection;
+        return Attendance;
     });

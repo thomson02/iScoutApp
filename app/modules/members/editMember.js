@@ -1,5 +1,5 @@
 define(
-    ['jquery', 'backbone', 'underscore', 'text!templates/editMember.html', 'service'],
+    ['jquery', 'backbone', 'underscore', 'text!modules/members/editMember.html', 'service'],
     function($, Backbone, _, template, Service) {
 
         var Members = Backbone.View.extend({

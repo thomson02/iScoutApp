@@ -1,5 +1,5 @@
 define(
-    ['jquery', 'backbone', 'underscore', 'text!templates/badgeInfo.html', 'badgeData'],
+    ['jquery', 'backbone', 'underscore', 'text!modules/badgeLibrary/badgeInfo.html', 'badgeData'],
     function($, Backbone, _, template, BadgeData) {
 
         var BadgeInfo = Backbone.View.extend({
@@ -14,7 +14,7 @@ define(
 
             render: function() {
                 console.log("Rendering the Badge Info page.");
-                var html = _.template(template, { section: this.section, group: this.group, badge: this.badge });
+                var html = _.template(template, { group: this.group, badge: this.badge });
                 this.$el.html(html);
                 return this;
             }

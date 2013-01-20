@@ -1,5 +1,5 @@
 define(
-    ['jquery', 'backbone', 'underscore', 'text!templates/promiseLaw.html', 'sectionData'],
+    ['jquery', 'backbone', 'underscore', 'text!modules/promiseLaw/promiseLaw.html', 'sectionData'],
     function($, Backbone, _, template, SectionData) {
 
         var PromiseLaw = Backbone.View.extend({

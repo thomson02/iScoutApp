@@ -1,5 +1,5 @@
 define(
-    ['jquery', 'backbone', 'underscore', 'text!templates/members.html'],
+    ['jquery', 'backbone', 'underscore', 'text!modules/members/members.html'],
     function($, Backbone, _, template) {
 
         var Members = Backbone.View.extend({

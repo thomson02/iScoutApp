@@ -1,5 +1,16 @@
-define(["jquery", "backbone", "underscore", "service", "views/launchpad", "views/members", "views/viewMember", "views/editMember", "views/promiseLaw", "views/badgeGroups", "views/badgeList", "views/badgeInfo", "views/inspection", "jquerymobile"],
-    function($, Backbone, _, Service, Launchpad, Members, ViewMember, EditMember, PromiseLaw, BadgeGroups, BadgeList, BadgeInfo, Inspection) {
+define([
+    "jquery",
+    "backbone",
+    "underscore",
+    "service",
+    "modules/launchpad/launchpad",
+    "jquerymobile"],
+    function(
+        $,
+        Backbone,
+        _,
+        Service,
+        Launchpad) {
 
         /* Controls the displaying of Backbone Views. */
         var AppView = Backbone.Model.extend({
@@ -36,93 +47,29 @@ define(["jquery", "backbone", "underscore", "service", "views/launchpad", "views
         var Router = Backbone.Router.extend({
 
             routes: {
-                "members/view": "viewAllMembers",
-                "members/view/:id": "viewMemberDetails",
-                "members/edit/:id": "editMemberDetails",
-                "promiseLaw/:section": "promiseLaw",
-                "badgeLibrary/:section": "badgeGroups",
-                "badgeLibrary/:section/:group": "badgeList",
-                "badgeLibrary/:section/:group/:badgeIndex": "badgeInfo",
-                "inspection": "inspection",
                 "*actions": "launchpad"
             },
 
             initialize: function(options) {
+                var that = this;
                 this.appView = new AppView();
+                this.section = options.section;
+                this.modules = options.modules;
+
+                // bolt on plugged in apps
+                _.each(this.modules, function(module){
+                    _.extend(that, module.funcs);
+                    _.each(module.routes, function(val, key){
+                        that.route(key, val);
+                    });
+                });
             },
 
             launchpad: function() {
               this.appView.showView(new Launchpad({
-                session: this.session
+                section: this.section,
+                modules: this.modules
               }));
-            },
-
-            viewAllMembers: function() {
-                var that = this;
-                Service.getUsers(function(res){
-                    that.appView.showView(new Members({
-                        users: res.users
-                    }));
-                });
-            },
-
-            viewMemberDetails: function(id){
-                var that = this;
-                Service.getUserHeaderById(id, function(res) {
-                    that.appView.showView(new ViewMember({
-                        user: res
-                    }));
-                });
-            },
-
-            editMemberDetails: function(id){
-                var that = this;
-                var userPromise = Service.getUserHeaderById(id);
-                var patrolsPromise = Service.getListOfPatrols();
-
-                $.when(userPromise, patrolsPromise).done(function(userParams, patrolParams) {
-                    that.appView.showView(new EditMember({
-                        user: userParams[0],
-                        patrols: patrolParams[0].patrols.Patrols
-                    }));
-                });
-
-            },
-
-            promiseLaw: function(section){
-              this.appView.showView(new PromiseLaw({
-                  section: section
-              }))
-            },
-
-            badgeGroups: function(section) {
-                this.appView.showView(new BadgeGroups({
-                    section: section
-                }));
-            },
-
-            badgeList: function(section, group){
-                this.appView.showView(new BadgeList({
-                    section: section,
-                    group: group
-                }));
-            },
-
-            badgeInfo: function(section, group, badgeIndex){
-                this.appView.showView(new BadgeInfo({
-                    section: section,
-                    group: group,
-                    badgeIndex: badgeIndex
-                }));
-            },
-
-            inspection: function() {
-                var that = this;
-                Service.getUsers(function(res){
-                    that.appView.showView(new Inspection({
-                        users: res.users
-                    }));
-                });
             }
         });
 

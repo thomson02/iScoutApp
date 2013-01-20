@@ -1,12 +1,12 @@
 <div data-role="header" data-id="primary-header" data-position="fixed">
-    <a href="#/badgeLibrary/<%= section %>" data-icon="arrow-l">Back</a>
+    <a href="#/badgeLibrary" data-icon="arrow-l">Back</a>
     <h1><%= group %></h1>
 </div>
 
 <div data-role="content">
     <ul data-role="listview" data-filter="true" data-theme="c">
         <% _.each(badgeData, function(badge, i) { %>
-            <li class="ui-li-has-thumb"><img class="ui-li-thumb" src="<%= badge.image %>"/><a href="#/badgeLibrary/<%= section %>/<%= group %>/<%= i %>"><%= badge.title %></a></li>
+            <li class="ui-li-has-thumb"><img class="ui-li-thumb" src="<%= badge.image %>"/><a href="#/badgeLibrary/<%= group %>/<%= i %>"><%= badge.title.replace("Activity Badge", "") %></a></li>
         <% }); %>
     </ul>
 </div>

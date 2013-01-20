@@ -1,0 +1,25 @@
+<div data-role="header" data-id="primary-header" data-position="fixed">
+    <a id="logout-button" href="/logout" data-icon="delete" data-iconpos="notext">Exit</a>
+    <h1>iScout</h1>
+</div>
+
+<div data-role="content" id="launchpad-content">
+
+    <% _.each(modules, function(module, i) { %>
+        <% if (i % 3 === 0) { %>
+            <% if (i !== 0) { %> </div> <% } %>
+            <div class="ui-grid-b">
+                <div class="ui-block-a">
+        <% } else if (i % 3 === 1) { %>
+                <div class="ui-block-b">
+        <% } else if (i % 3 === 2) { %>
+                <div class="ui-block-c">
+        <% } %>
+
+                    <div class="launchpad-button-holder">
+                        <a href="<%= module.link %>" class="launchpad-button <%= module.icon %>"><span class="launchpad-button-text"><%= module.title %></span></a>
+                    </div>
+                </div>
+    <% }); %>
+    </div>
+</div>

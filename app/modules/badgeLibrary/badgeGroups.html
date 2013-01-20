@@ -7,7 +7,7 @@
     <ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
         <li data-role="list-divider">Badges</li>
         <% _.each(badgeData, function(group, key) { %>
-            <li><a href="#/badgeLibrary/<%= section %>/<%= key %>"><%= key %></a></li>
+            <li><a href="#/badgeLibrary/<%= key %>"><%= key %></a></li>
         <% }); %>
     </ul>
 </div>
