@@ -106,6 +106,7 @@ exports.configureRoutes = function(app, User, MetaData) {
 
     var getListOfPatrols = function(req, res) {
       MetaData.findOne({ key: 'patrols' }, function(err, patrols){
+          console.log(patrols.value);
           if (err || !patrols) {
               console.log(err);
               return res.json({ result: "Failed" });

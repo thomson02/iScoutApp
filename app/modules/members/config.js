@@ -49,9 +49,11 @@ define([
                 var patrolsPromise = Service.getListOfPatrols();
 
                 $.when(userPromise, patrolsPromise).done(function(userParams, patrolParams) {
+                    var patrols = patrolParams && (patrolParams.length > 0) && patrolParams[0].patrols && patrolParams[0].patrols.Patrols ? patrolParams[0].patrols.Patrols : [];
+
                     that.appView.showView(new EditMember({
                         user: userParams[0],
-                        patrols: patrolParams[0].patrols.Patrols
+                        patrols: patrols
                     }));
                 });
             }

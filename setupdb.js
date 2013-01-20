@@ -110,7 +110,7 @@ kirstin.save();
 // Dummy MetaData Data
 var patrols = new MetaData({
     key: "patrols",
-    value: '{"Patrols":["Eagle","Stag"]}'
+    value: "{\"Patrols\":[\"Eagle\",\"Stag\"]}"
 });
 
 patrols.save();
