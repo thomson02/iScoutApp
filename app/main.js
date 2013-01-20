@@ -3,7 +3,7 @@ requirejs(['jquery', 'backbone', 'router', "modules/badgeLibrary/config", "modul
     $(function() {
         new Router({
             section: "Scouts",
-            modules: [Members, PromiseLaw, BadgeLibrary]
+            modules: [Members, PromiseLaw, BadgeLibrary, Attendance]
         });
 
         Backbone.history.start({ pushState: false, root: "/mobile.html" });

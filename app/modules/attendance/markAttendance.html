@@ -1,0 +1,67 @@
+<div data-role="header" data-id="primary-header" data-position="fixed">
+    <a href="#/attendance" data-icon="arrow-l">Back</a>
+    <h1>Attendance</h1>
+    <% if (updating) { %>
+        <a class="update" data-theme="b" data-icon="check">Update</a>
+    <% } else { %>
+        <a class="save" data-theme="b" data-icon="check">Save</a>
+    <% } %>
+</div>
+
+<div data-role="content" style="margin-top: 0px; padding-top: 0px">
+
+    <h2><%= user.name %> <i> (<%= user.patrol.name %>)</i></h2>
+
+    <div data-role="fieldcontain">
+        <label for="shirt">Shirt:</label>
+        <input type="range" name="shirt" id="shirt" value="<%= points.shirt %>" min="0" max="4" />
+    </div>
+
+    <div data-role="fieldcontain">
+        <label for="trousers">Trousers:</label>
+        <input type="range" name="trousers" id="trousers" value="<%= points.trousers %>" min="0" max="3" />
+    </div>
+
+    <div data-role="fieldcontain">
+        <label for="neckie">Neckie:</label>
+        <input type="range" name="neckie" id="neckie" value="<%= points.neckie %>" min="0" max="3" />
+    </div>
+
+    <div data-role="fieldcontain">
+        <label for="woggle">Woggle:</label>
+        <select name="woggle" id="woggle" data-role="slider">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+    </div>
+
+    <div data-role="fieldcontain">
+        <label for="belt">Belt:</label>
+        <input type="range" name="belt" id="belt" value="<%= points.belt %>" min="0" max="2" />
+    </div>
+
+    <div data-role="fieldcontain">
+        <label for="shoes">Shoes:</label>
+        <input type="range" name="shoes" id="shoes" value="<%= points.shoes %>" min="0" max="2" />
+    </div>
+
+    <div data-role="fieldcontain">
+        <label for="penPaper">Pen/Paper:</label>
+        <input type="range" name="penPaper" id="penPaper" value="<%= points.penPaper %>" min="0" max="2" />
+    </div>
+
+    <div data-role="fieldcontain">
+        <label for="book">Book:</label>
+        <select name="book" id="book" data-role="slider">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+    </div>
+
+    <div data-role="fieldcontain">
+        <label for="behaviour">Behaviour:</label>
+        <input type="range" name="behaviour" id="behaviour" value="<%= points.behaviour %>" min="0" max="2" />
+    </div>
+
+</div>
+

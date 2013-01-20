@@ -1,6 +1,6 @@
 <div data-role="header" data-id="primary-header" data-position="fixed">
     <a href="#/launchpad" data-icon="arrow-l">Back</a>
-    <h1>Inspection</h1>
+    <h1>Attendance</h1>
 </div>
 
 <div data-role="content" style="margin-top: 0px; padding-top: 0px">
@@ -8,7 +8,30 @@
         <ul data-role="listview" data-inset="true">
             <li data-role="list-divider"><%= key %></li>
             <% _.each(patrolMembers, function(member){ %>
-                <li><a href="#/attendance/<%= member._id %>"><%= member.name %></a></li>
+
+                <%
+                    var bubble = "";
+                    if (member.attendance && (member.attendance.length > 0)){
+
+                        var millisBetween = new Date().getTime() - new Date(member.attendance[0].date).getTime();
+                        if (Math.floor(millisBetween / (1000 * 60 * 60 * 24)) === 0){
+                            var points = member.attendance[0].points;
+                            var score = points.shirt +
+                                        points.trousers +
+                                        points.neckie +
+                                        points.belt +
+                                        points.woggle +
+                                        points.shoes +
+                                        points.penPaper +
+                                        points.book +
+                                        points.behaviour;
+
+                            bubble = '<span class="ui-li-count">' + score + '/20</span>';
+                        }
+                    }
+                %>
+
+                <li><a href="#/attendance/<%= member._id %>"><%= member.name %><%= bubble %></a></li>
             <% }); %>
         </ul>
     <% }); %>

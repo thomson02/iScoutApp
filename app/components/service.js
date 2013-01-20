@@ -65,6 +65,17 @@ define(['jquery'], function($) {
             });
         },
 
+        updateAttendance: function(userId, attendanceId, attendanceData, callback){
+            return $.ajax({
+                url: "/api/attendance/user/" + userId + "/attendance/" + attendanceId,
+                type: "POST",
+                data: attendanceData,
+                success: function(res) {
+                    if (callback) { callback(res); }
+                }
+            });
+        },
+
         getListOfPatrols: function(callback){
             return $.ajax({
                 url: "/api/patrols",

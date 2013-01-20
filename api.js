@@ -7,6 +7,7 @@
  */
 
 var util = require('util');
+var _ = require('underscore');
 
 exports.configureRoutes = function(app, User, MetaData) {
 
@@ -17,6 +18,10 @@ exports.configureRoutes = function(app, User, MetaData) {
                 console.log(err);
                 return res.json({ result: "Failed" });
             }
+
+            _.each(users, function(user){
+                user.attendance = [user.attendance[user.attendance.length - 1]]; // reduce size of data transfer by just sending the most recent
+            });
 
             return res.json({ result: "Success", users: users });
         });
@@ -78,6 +83,27 @@ exports.configureRoutes = function(app, User, MetaData) {
         });
     };
 
+    var updateAttendance = function(req, res){
+        User.findOne({ _id: req.params.id }, function(err, user){
+            if (err) {
+                console.log(err);
+                return res.json({ result: "Failed" });
+            }
+
+            var attendance = _.find(user.attendance, function(attend){
+                return attend._id == req.params.attendanceId;
+            });
+
+            if (attendance) {
+                attendance.points = req.body.points;
+                user.save();
+                return res.json({ result: "Success" });
+            }
+
+            return res.json({ result: "Failed" });
+        });
+    };
+
     var getListOfPatrols = function(req, res) {
       MetaData.findOne({ key: 'patrols' }, function(err, patrols){
           if (err) {
@@ -108,6 +134,7 @@ exports.configureRoutes = function(app, User, MetaData) {
 
     app.get('/api/attendance/user/:id', getAttendanceForUser); //
     app.post('/api/attendance/user/:id', addAttendanceToUser);
+    app.post('/api/attendance/user/:id/attendance/:attendanceId', updateAttendance);
 
     app.get('/api/patrols', getListOfPatrols); //
     app.get('/api/patrols/:patrol', getMembersOfPatrol); //

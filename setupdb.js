@@ -37,6 +37,7 @@ var andrew = new User({
                 neckie: 5,
                 belt: 5,
                 shoes: 5,
+                woggle: 0,
                 penPaper: 5,
                 book: 5,
                 behaviour: 5
@@ -49,6 +50,7 @@ var andrew = new User({
                 trousers: 4,
                 neckie: 4,
                 belt: 4,
+                woggle: 0,
                 shoes: 4,
                 penPaper: 4,
                 book: 4,
@@ -80,6 +82,7 @@ var kirstin = new User({
                 neckie: 5,
                 belt: 5,
                 shoes: 5,
+                woggle: 0,
                 penPaper: 5,
                 book: 5,
                 behaviour: 5
@@ -93,6 +96,7 @@ var kirstin = new User({
                 neckie: 4,
                 belt: 4,
                 shoes: 4,
+                woggle: 0,
                 penPaper: 4,
                 book: 4,
                 behaviour: 4

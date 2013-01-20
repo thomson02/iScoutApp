@@ -17,6 +17,7 @@ exports.configureSchema = function(Schema, mongoose) {
                 shirt: Number,
                 trousers: Number,
                 neckie: Number,
+                woggle: Number,
                 belt: Number,
                 shoes: Number,
                 penPaper: Number,
