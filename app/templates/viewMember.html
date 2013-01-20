@@ -1,0 +1,35 @@
+<div data-role="header" data-id="primary-header" data-position="fixed">
+    <a href="#/members/view" data-icon="arrow-l">Back</a>
+    <h1>Member</h1>
+    <a href="#/members/edit/<%= member._id %>" data-theme="b">Edit</a>
+</div>
+
+<div data-role="content">
+
+    <h2><%= member.name %></h2>
+
+    <table>
+        <tr>
+            <td><b>Email:</b></td>
+            <td><%= member.email %></td>
+        </tr>
+        <tr>
+            <td><b>Phone:</b></td>
+            <td><%= member.phone %></td>
+        </tr>
+        <tr>
+            <td><b>Mobile:</b></td>
+            <td><%= member.mobile %></td>
+        </tr>
+        <tr>
+            <% var patrol = member.patrol.rank !== "" ? (member.patrol.name + " (" + member.patrol.rank + ")") : member.patrol.name; %>
+            <td><b>Patrol:</b></td>
+            <td><%= patrol %></td>
+        </tr>
+        <tr>
+            <td><b>Medical:</b></td>
+            <td><%= member.medical %></td>
+        </tr>
+    </table>
+
+</div>

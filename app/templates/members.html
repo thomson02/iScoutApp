@@ -1,9 +1,9 @@
 <div data-role="header" data-id="primary-header" data-position="fixed">
-    <a href="#/home" data-icon="arrow-l">Back</a>
+    <a href="#/launchpad" data-icon="arrow-l">Back</a>
     <h1>Members</h1>
 </div>
 
-<div data-role="content" style="margin-top: 0px; padding-top: 0px">
+<div data-role="content">
     <ul data-role="listview" data-filter="true" data-filter-placeholder="Search people..." data-filter-theme="d"data-theme="d" data-divider-theme="d">
 
         <% var firstChar = ""; %>
@@ -17,7 +17,7 @@
             <%
                 }
             %>
-            <li><a href="#/members/<%= user._id %>"><%= user.name %></a></li>
+            <li><a href="#/members/view/<%= user._id %>"><%= user.name %></a></li>
 
         <% }); %>
 

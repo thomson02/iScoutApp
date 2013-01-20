@@ -10,7 +10,9 @@ requirejs.config({
         'backbone': 'components/backbone/backbone',
         'text': 'components/requirejs/plugins/text',
         'jqm.config': 'components/jquerymobile/jqm.config',
-        'service': 'components/service'
+        'service': 'components/service',
+        'badgeData': 'components/data/badgeData',
+        'sectionData': 'components/data/sectionData'
     },
     shim: {
         'jquery': {

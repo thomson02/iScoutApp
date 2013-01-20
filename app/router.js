@@ -1,5 +1,5 @@
-define(["jquery", "backbone", "underscore", "service", "views/home", "views/members", "views/inspection", "views/member", "jquerymobile"],
-    function($, Backbone, _, Service, HomePage, Members, Inspection, Member) {
+define(["jquery", "backbone", "underscore", "service", "views/launchpad", "views/members", "views/viewMember", "views/editMember", "views/promiseLaw", "views/badgeGroups", "views/badgeList", "views/badgeInfo", "views/inspection", "jquerymobile"],
+    function($, Backbone, _, Service, Launchpad, Members, ViewMember, EditMember, PromiseLaw, BadgeGroups, BadgeList, BadgeInfo, Inspection) {
 
         /* Controls the displaying of Backbone Views. */
         var AppView = Backbone.Model.extend({
@@ -36,23 +36,28 @@ define(["jquery", "backbone", "underscore", "service", "views/home", "views/memb
         var Router = Backbone.Router.extend({
 
             routes: {
-                "members": "members",
-                "members/:id": "memberDetails",
+                "members/view": "viewAllMembers",
+                "members/view/:id": "viewMemberDetails",
+                "members/edit/:id": "editMemberDetails",
+                "promiseLaw/:section": "promiseLaw",
+                "badgeLibrary/:section": "badgeGroups",
+                "badgeLibrary/:section/:group": "badgeList",
+                "badgeLibrary/:section/:group/:badgeIndex": "badgeInfo",
                 "inspection": "inspection",
-                "*actions": "home"
+                "*actions": "launchpad"
             },
 
             initialize: function(options) {
                 this.appView = new AppView();
             },
 
-            home: function() {
-              this.appView.showView(new HomePage({
+            launchpad: function() {
+              this.appView.showView(new Launchpad({
                 session: this.session
               }));
             },
 
-            members: function() {
+            viewAllMembers: function() {
                 var that = this;
                 Service.getUsers(function(res){
                     that.appView.showView(new Members({
@@ -61,13 +66,54 @@ define(["jquery", "backbone", "underscore", "service", "views/home", "views/memb
                 });
             },
 
-            memberDetails: function(id){
+            viewMemberDetails: function(id){
                 var that = this;
                 Service.getUserHeaderById(id, function(res) {
-                    that.appView.showView(new Member({
+                    that.appView.showView(new ViewMember({
                         user: res
                     }));
                 });
+            },
+
+            editMemberDetails: function(id){
+                var that = this;
+                var userPromise = Service.getUserHeaderById(id);
+                var patrolsPromise = Service.getListOfPatrols();
+
+                $.when(userPromise, patrolsPromise).done(function(userParams, patrolParams) {
+                    that.appView.showView(new EditMember({
+                        user: userParams[0],
+                        patrols: patrolParams[0].patrols.Patrols
+                    }));
+                });
+
+            },
+
+            promiseLaw: function(section){
+              this.appView.showView(new PromiseLaw({
+                  section: section
+              }))
+            },
+
+            badgeGroups: function(section) {
+                this.appView.showView(new BadgeGroups({
+                    section: section
+                }));
+            },
+
+            badgeList: function(section, group){
+                this.appView.showView(new BadgeList({
+                    section: section,
+                    group: group
+                }));
+            },
+
+            badgeInfo: function(section, group, badgeIndex){
+                this.appView.showView(new BadgeInfo({
+                    section: section,
+                    group: group,
+                    badgeIndex: badgeIndex
+                }));
             },
 
             inspection: function() {

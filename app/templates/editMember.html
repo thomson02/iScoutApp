@@ -1,0 +1,57 @@
+<div data-role="header" data-id="primary-header" data-position="fixed">
+    <a href="#/members/view/<%= member._id %>" data-icon="delete">Cancel</a>
+    <h1>Member</h1>
+    <a class="save" data-theme="b" data-icon="check">Save</a>
+</div>
+
+<div data-role="content">
+    <div data-role="fieldcontain">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" value="<%= member.name %>"  />
+    </div>
+
+    <div data-role="fieldcontain">
+        <label for="email">Email:</label>
+        <input type="text" name="email" id="email" value="<%= member.email %>"  />
+    </div>
+
+    <div data-role="fieldcontain">
+        <label for="phone">Phone:</label>
+        <input type="text" name="name" id="phone" value="<%= member.phone %>"  />
+    </div>
+
+    <div data-role="fieldcontain">
+        <label for="mobile">Mobile:</label>
+        <input type="text" name="mobile" id="mobile" value="<%= member.mobile %>"  />
+    </div>
+
+    <div data-role="fieldcontain">
+        <label for="patrol">Patrol:</label>
+        <select name="patrol" id="patrol">
+            <% _.each(patrols, function(patrol) { %>
+                <option value="<%= patrol %>"><%= patrol %></option>
+            <% }); %>
+            <option value="NEW">Create New</option>
+        </select>
+    </div>
+
+    <div id="newPatrolContainer" data-role="fieldcontain" style="display: none;">
+        <label for="newPatrol">New Patrol:</label>
+        <input type="text" name="newPatrol" id="newPatrol" value="" />
+    </div>
+
+    <div data-role="fieldcontain">
+        <label for="rank" class="select">Rank:</label>
+        <select name="rank" id="rank">
+            <option value="SPL">SPL</option>
+            <option value="PL">PL</option>
+            <option value="APL">APL</option>
+            <option value="Patrol Member">Patrol Member</option>
+        </select>
+    </div>
+
+    <div data-role="fieldcontain">
+        <label for="medical">Medical Info:</label>
+        <textarea type="text" name="medical" id="medical"><%= member.medical %></textarea>
+    </div>
+</div>

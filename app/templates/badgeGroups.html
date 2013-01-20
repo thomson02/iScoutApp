@@ -1,0 +1,13 @@
+<div data-role="header" data-id="primary-header" data-position="fixed">
+    <a href="#/launchpad" data-icon="arrow-l">Back</a>
+    <h1>Badge Library</h1>
+</div>
+
+<div data-role="content">
+    <ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
+        <li data-role="list-divider">Badges</li>
+        <% _.each(badgeData, function(group, key) { %>
+            <li><a href="#/badgeLibrary/<%= section %>/<%= key %>"><%= key %></a></li>
+        <% }); %>
+    </ul>
+</div>

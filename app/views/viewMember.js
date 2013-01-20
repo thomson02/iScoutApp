@@ -1,5 +1,5 @@
 define(
-    ['jquery', 'backbone', 'underscore', 'text!templates/member.html'],
+    ['jquery', 'backbone', 'underscore', 'text!templates/viewMember.html'],
     function($, Backbone, _, template) {
 
         var Members = Backbone.View.extend({
@@ -11,7 +11,7 @@ define(
             },
 
             render: function() {
-                console.log("Rendering the Member page.");
+                console.log("Rendering the View Member page.");
                 var html = _.template(template, { member: this.user });
                 this.$el.html(html);
                 return this;

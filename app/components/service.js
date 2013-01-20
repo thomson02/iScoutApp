@@ -7,7 +7,7 @@ define(['jquery'], function($) {
                 url: "/api/users",
                 type: "GET",
                 success: function(res) {
-                    callback(res);
+                    if (callback) { callback(res); }
                 }
             });
         },
@@ -17,7 +17,7 @@ define(['jquery'], function($) {
                 url: "/api/user/" + id,
                 type: "GET",
                 success: function(res) {
-                    callback(res);
+                    if (callback) { callback(res); }
                 }
             });
         },
@@ -28,7 +28,7 @@ define(['jquery'], function($) {
                 type: "POST",
                 data: userData,
                 success: function(res) {
-                    callback(res);
+                    if (callback) { callback(res); }
                 }
             });
         },
@@ -39,7 +39,7 @@ define(['jquery'], function($) {
                 type: "PUT",
                 data: userData,
                 success: function(res) {
-                    callback(res);
+                    if (callback) { callback(res); }
                 }
             });
         },
@@ -49,7 +49,7 @@ define(['jquery'], function($) {
                 url: "/api/attendance/user/" + id,
                 type: "GET",
                 success: function(res) {
-                    callback(res);
+                    if (callback) { callback(res); }
                 }
             });
         },
@@ -60,7 +60,7 @@ define(['jquery'], function($) {
                 type: "POST",
                 data: attendanceData,
                 success: function(res) {
-                    callback(res);
+                    if (callback) { callback(res); }
                 }
             });
         },
@@ -70,7 +70,7 @@ define(['jquery'], function($) {
                 url: "/api/patrols",
                 type: "GET",
                 success: function(res) {
-                    callback(res);
+                    if (callback) { callback(res); }
                 }
             });
         },
@@ -80,7 +80,7 @@ define(['jquery'], function($) {
                 url: "/api/patrols/" + patrol,
                 type: "GET",
                 success: function(res) {
-                    callback(res);
+                    if (callback) { callback(res); }
                 }
             });
         }
