@@ -13,5 +13,6 @@ results
 node_modules
 .idea
 .env
+.DS_Store
 
 npm-debug.log

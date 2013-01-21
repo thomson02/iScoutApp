@@ -1,6 +1,3 @@
-
-console.log("Starting app ...");
-
 requirejs.config({
     deps: ['main'],
     paths: {
