@@ -6,7 +6,7 @@ requirejs(['jquery', 'backbone', 'router', "modules/badgeLibrary/config", "modul
             modules: [Members, PromiseLaw, BadgeLibrary, Attendance]
         });
 
-        Backbone.history.start({ pushState: false, root: "/mobile.html" });
+        Backbone.history.start({ pushState: false, root: "/index.html" });
     });
 });
 

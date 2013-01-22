@@ -12,19 +12,6 @@ requirejs.config({
         'sectionData': 'components/data/sectionData'
     },
     shim: {
-        'jquery': {
-            exports: 'jQuery',
-            init: function($) {
-                return this.jQuery.noConflict();
-            }
-        },
-        'jqm.config': {
-            deps: ['jquery']
-        },
-        'jquerymobile': {
-            deps: ['jquery', 'jqm.config'],
-            exports: '$'
-        },
         'underscore': {
             exports: '_'
         },
