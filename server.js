@@ -9,6 +9,7 @@ var express = require('express')
     , path = require('path')
     , models = require("./models")
     , mongoose = require('mongoose')
+    , _ = require('underscore')
     , fs = require('fs');
 
 // Setup the Mongo db connection
@@ -33,10 +34,6 @@ app.configure(function(){
     app.use(express.static(path.join(__dirname, 'app')));
 });
 
-app.configure('development', function(){
-    app.use(express.errorHandler());
-});
-
 // Setup the Routes
 // ================
 app.get("/cache.manifest", function(req, res){
@@ -52,11 +49,13 @@ app.get("/cache.manifest", function(req, res){
 });
 
 app.get('/', function(req, res) {
-    //if(!req.user) {
-      //  return res.sendfile('./app/splash.html');
-    //}
+    fs.readFile('./app/index.html', 'utf8', function (err, data){
+        if (err) {
+            return console.log(err);
+        }
 
-    return res.sendfile('./app/index.html');
+        return res.end(_.template(data, { devmode: process.env.DEVMODE == "1" }));
+    });
 });
 
 api.configureRoutes(app, User, MetaData);
@@ -65,4 +64,5 @@ api.configureRoutes(app, User, MetaData);
 // ================
 http.createServer(app).listen(app.get('port'), function(){
     console.log("Express server listening on port " + app.get('port'));
+    console.log("DEV MODE: " + (process.env.DEVMODE == "1" ? "ON" : "OFF"));
 });
